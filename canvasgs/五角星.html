@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>五角星</title>
+		<style>
+			#canvas{
+				display: block;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			window.onload=function(){
+				var canvas = document.getElementById("canvas"),
+					ctx = canvas.getContext('2d');
+				canvas.width = 1200;
+				canvas.height = 800;
+				
+				var skyStyle = ctx.createLinearGradient(0,0,0,canvas.height);
+				skyStyle.addColorStop(0.0,'black');
+				skyStyle.addColorStop(1.0,'#035');
+				ctx.fillStyle = skyStyle;
+				ctx.fillRect(0,0,canvas.width,canvas.height);
+				for(var i=0;i<200;i++){
+					var r = Math.random()*5+5,
+						x = Math.random()*canvas.width,
+						y = Math.random()*canvas.height*0.65,
+						a = Math.random()*360;
+					drawStar(ctx,x,y,r,a);
+				}
+			}
+			
+			function drawStar(ctx,x,y,r,rot){
+				ctx.save();
+				
+				ctx.translate(x,y);
+				ctx.rotate(rot/180*Math.PI);
+				ctx.scale(r,r);
+				
+				startPath(ctx);
+				
+				ctx.fillStyle = "#fb3";
+//				ctx.strokeStyle = "#fd5";
+//				ctx.lineWidth = 3;
+//				ctx.lineJoin = "round";
+				
+				ctx.fill();
+//				ctx.stroke();
+				
+				ctx.restore();
+			}
+			
+			//勾绘线条
+			function startPath(ctx){
+				ctx.beginPath();
+				for(var i=0;i<5;i++){
+					//外圆上的点
+					ctx.lineTo(Math.cos((18+i*72)/180*Math.PI),
+							   -Math.sin((18+i*72)/180*Math.PI));
+				   	//内圆上的点
+				   	ctx.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,
+							   -Math.sin((54+i*72)/180*Math.PI)*0.5);
+				}
+				ctx.closePath();
+			}
+		</script>
+	</body>
+</html>

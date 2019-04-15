@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#canvas,#canvas1{
+				display: inline-block;
+				border: 1px solid #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<canvas id="canvas1"></canvas>
+		<script>
+			window.onload=function(){
+				var canvas = document.getElementById("canvas"),
+					ctx = canvas.getContext('2d');
+				canvas.width = 800;
+				canvas.height = 800;
+				
+				var linearGrad = ctx.createLinearGradient(0,0,800,800);
+				linearGrad.addColorStop(0.0,'white');
+				linearGrad.addColorStop(0.25,'yellow');
+				linearGrad.addColorStop(0.5,'green');
+				linearGrad.addColorStop(0.75,'blue');
+				linearGrad.addColorStop(1.0,'black');
+				ctx.fillStyle = linearGrad;
+				ctx.fillRect(0,0,800,800);
+				
+				var canvas1 = document.getElementById("canvas1"),
+					ctx1 = canvas1.getContext('2d');
+				canvas1.width = 800;
+				canvas1.height = 800;
+				
+				var radialGrad = ctx1.createRadialGradient(400,400,0,400,400,500);
+				radialGrad.addColorStop(0.0,'white');
+				radialGrad.addColorStop(0.25,'yellow');
+				radialGrad.addColorStop(0.5,'green');
+				radialGrad.addColorStop(0.75,'blue');
+				radialGrad.addColorStop(1.0,'black');
+				ctx1.fillStyle = radialGrad;
+				ctx1.fillRect(0,0,800,800);
+			}
+		</script>
+	</body>
+</html>
